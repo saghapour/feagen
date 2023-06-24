@@ -19,8 +19,9 @@ public class EnvironmentTest {
             new EnvironmentVariables(envKey, "10");
     @Test
     public void testEnvVar() {
+        environmentVariables.set(envKey, "10");
         Assertions.assertEquals("10", Environment.getEnv(envKey));
         Assertions.assertNull(Environment.getEnv(envKeyNotExist));
-        Assertions.assertThrows(MandatoryKeyException.class, () -> Environment.getEnv(envKeyNotExist, true));
+        Assertions.assertThrows(MandatoryKeyException.class, () -> Environment.getEnv(envKeyNotExist, true, true));
     }
 }

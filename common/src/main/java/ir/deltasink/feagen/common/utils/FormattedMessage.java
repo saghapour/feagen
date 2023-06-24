@@ -34,6 +34,9 @@ public class FormattedMessage {
      * @return  returns a MessageFormat
      */
     private MessageFormat getMessageFormat(){
+//        if (messagePattern == null || messagePattern.isEmpty())
+//            return new MessageFormat("");
+
         val sb = new StringBuilder();
         int placeholderIndex = 0;
         for (int i=0; i<messagePattern.length()-1; i++){

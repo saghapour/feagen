@@ -56,4 +56,14 @@ public class MapUtils {
 
         return map;
     }
+
+    public static Map<String, Object> union(Map<String, Object> map1, Map<String, Object> map2){
+        Map<String, Object> result = new HashMap<>(map1);
+        for (Map.Entry<String, Object> entry:
+        map2.entrySet()){
+            result.put(entry.getKey(), entry.getValue());
+        }
+
+        return result;
+    }
 }

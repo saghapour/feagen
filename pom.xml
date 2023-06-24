@@ -19,10 +19,17 @@
         <maven.compiler.target>11</maven.compiler.target>
         <lombok.version>1.18.20</lombok.version>
         <guice.version>5.1.0</guice.version>
+        <spark.version>3.3.1</spark.version>
+        <scala.version>2.12</scala.version>
+        <confluent.version>5.3.0</confluent.version>
+        <deltalake.version>2.2.0</deltalake.version>
+        <hadoop.version>1.2.1</hadoop.version>
         <junit.version>5.9.2</junit.version>
         <mockito.version>5.3.1</mockito.version>
         <system-lambda.version>1.0.0</system-lambda.version>
         <system-stubs.version>1.1.0</system-stubs.version>
+        <xml.jackson.version>2.10.0</xml.jackson.version>
+        <gson.version>2.10.1</gson.version>
     </properties>
 
     <dependencyManagement>
@@ -37,6 +44,88 @@
                 <artifactId>guice</artifactId>
                 <version>${guice.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-core_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-hive_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-streaming_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-streaming-kafka-0-10_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-sql-kafka-0-10_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+                <!--            <exclusions>-->
+                <!--                <exclusion>-->
+                <!--                    <groupId>org.apache.kafka</groupId>-->
+                <!--                    <artifactId>kafka-clients</artifactId>-->
+                <!--                </exclusion>-->
+                <!--            </exclusions>-->
+            </dependency>
+            <dependency>
+                <groupId>org.apache.spark</groupId>
+                <artifactId>spark-avro_${scala.version}</artifactId>
+                <version>${spark.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-core</artifactId>
+                <version>${hadoop.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-io</groupId>
+                        <artifactId>commons-io</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-net</groupId>
+                        <artifactId>commons-net</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.jackson</groupId>
+                        <artifactId>jackson-mapper-asl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-codec</groupId>
+                        <artifactId>commons-codec</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${xml.jackson.version}</version>
+            </dependency>
+            <!--            <dependency>-->
+            <!--                <groupId>com.google.code.gson</groupId>-->
+            <!--                <artifactId>gson</artifactId>-->
+            <!--                <version>${gson.version}</version>-->
+            <!--            </dependency>-->
             <dependency>
                 <groupId>org.junit.jupiter</groupId>
                 <artifactId>junit-jupiter-engine</artifactId>
@@ -61,7 +150,39 @@
                 <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
-        </dependencies>
 
+        </dependencies>
     </dependencyManagement>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.4.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+            <!--            <plugin>-->
+            <!--                <groupId>org.openrewrite.maven</groupId>-->
+            <!--                <artifactId>rewrite-maven-plugin</artifactId>-->
+            <!--                <version>5.2.1</version>-->
+            <!--                <configuration>-->
+            <!--                    <activeRecipes>-->
+            <!--                        <recipe>org.openrewrite.java.format.AutoFormat</recipe>-->
+            <!--                    </activeRecipes>-->
+            <!--                </configuration>-->
+            <!--            </plugin>-->
+        </plugins>
+    </build>
 </project>

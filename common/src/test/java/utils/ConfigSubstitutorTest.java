@@ -21,14 +21,14 @@ public class ConfigSubstitutorTest {
 
 
     @Test
-    void replace_null_null() {
+    void replaceNullNull() {
         String template = null;
         Map<String, Object> params = null;
         assertNull(ConfigSubstitutor.replace(template, params));
     }
 
     @Test
-    void replace_empty_empty() {
+    void replaceEmptyEmpty() {
         String template = "";
         Map<String, Object> params = new HashMap<>();
         String result = ConfigSubstitutor.replace(template, params);
@@ -36,7 +36,7 @@ public class ConfigSubstitutorTest {
     }
 
     @Test
-    void replace_template_empty() {
+    void replaceTemplateEmpty() {
         String template = "Hello {name}";
         Map<String, Object> params = new HashMap<>();
         String result = ConfigSubstitutor.replace(template, params);
@@ -44,21 +44,21 @@ public class ConfigSubstitutorTest {
     }
 
     @Test
-    void replace_template_envs() {
+    void replaceTemplateEnvs() {
         String template = "Hello ${USER}";
         String result = ConfigSubstitutor.replace(template);
         assertEquals("Hello Sajjad", result);
     }
 
     @Test
-    void replace_template_envs_with_default() {
+    void replaceTemplateEnvsWithDefault() {
         String template = "Hello ${USER_NOT_EXIST:Guest}";
         String result = ConfigSubstitutor.replace(template);
         assertEquals("Hello Guest", result);
     }
 
     @Test
-    void replace_template_params_and_envs() {
+    void replaceTemplateParamsAndEnvs() {
         String template = "Hello {name}, your home directory is ${HOME:/sa} and your user is ${USER}";
         Map<String, Object> params = new HashMap<>();
         params.put("name", "Sajjad");

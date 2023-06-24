@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MapUtilsTest {
 
     @Test
-    void combineDict_null_null() {
+    void combineDictNullNull() {
         Map<String, Object> map1 = null;
         Map<String, Object> map2 = null;
 
@@ -22,7 +22,7 @@ class MapUtilsTest {
     }
 
     @Test
-    void combineDict_map1_null() {
+    void combineDictMap1Null() {
         Map<String, Object> map1 = new HashMap<>();
         map1.put("a", 1);
         map1.put("b", 2);
@@ -35,7 +35,7 @@ class MapUtilsTest {
     }
 
     @Test
-    void combineDict_null_map2() {
+    void combineDictNullMap2() {
         Map<String, Object> map1 = null;
         Map<String, Object> map2 = new HashMap<>();
         map2.put("c", 3);
@@ -48,7 +48,7 @@ class MapUtilsTest {
     }
 
     @Test
-    void combineDict_map1_map2_no_overlap() {
+    void combineDictMap1Map2NoOverlap() {
         Map<String, Object> map1 = new HashMap<>();
         map1.put("a", 1);
         map1.put("b", 2);
@@ -67,8 +67,7 @@ class MapUtilsTest {
     }
 
     @Test
-    void combineDict_map1_map2_with_overlap() {
-// Arrange
+    void combineDictMap1Map2WithOverlap() {
         Map<String, Object> map1 = new HashMap<>();
         map1.put("a", 1);
         map1.put("b", 2);
@@ -76,10 +75,8 @@ class MapUtilsTest {
         map2.put("b", 20);
         map2.put("c", 3);
 
-// Act
         Map<String, Object> result = MapUtils.combineDict(map1, map2);
 
-// Assert
         assertNotNull(result);
         assertEquals(3, result.size());
         assertEquals(1, result.get("a"));
@@ -88,8 +85,7 @@ class MapUtilsTest {
     }
 
     @Test
-    void combineDict_map1_map2_with_nested_maps() {
-// Arrange
+    void combineDictMap1Map2WithNestedMaps() {
         Map<String, Object> submap1 = new HashMap<>();
         submap1.put("x", 10);
         submap1.put("y", 20);
@@ -103,10 +99,8 @@ class MapUtilsTest {
         map2.put("b", submap2);
         map2.put("c", 3);
 
-// Act
         Map<String, Object> result = MapUtils.combineDict(map1, map2);
 
-// Assert
         assertNotNull(result);
         assertEquals(3, result.size());
         assertEquals(1, result.get("a"));

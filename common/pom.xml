@@ -16,6 +16,9 @@
         <maven.compiler.target>11</maven.compiler.target>
         <common.text.version>1.10.0</common.text.version>
         <cron.version>9.2.1</cron.version>
+        <snakeyaml.version>1.33</snakeyaml.version>
+        <reflections.version>0.10.2</reflections.version>
+        <jsql.version>4.6</jsql.version>
     </properties>
 
     <dependencies>
@@ -42,7 +45,21 @@
         <dependency>
             <groupId>org.yaml</groupId>
             <artifactId>snakeyaml</artifactId>
-            <version>1.33</version>
+            <version>${snakeyaml.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>${reflections.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.jsqlparser</groupId>
+            <artifactId>jsqlparser</artifactId>
+            <version>${jsql.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.version}</artifactId>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>

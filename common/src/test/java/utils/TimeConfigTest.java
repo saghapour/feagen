@@ -8,9 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class TimeConfigTest {
-    /**
-     * Tests the parseToHour method with valid suffix-based configurations.
-     */
     @Test
     public void testParseToHourWithSuffix() {
         assertEquals(24, TimeConfig.parseToHour("1d"));
@@ -22,9 +19,6 @@ public class TimeConfigTest {
         assertEquals(2, TimeConfig.parseToHour("2"));
     }
 
-    /**
-     * Tests the parseToHour method with valid mathematical expressions.
-     */
     @Test
     public void testParseToHourWithMath() {
         assertEquals(51, TimeConfig.parseToHour("2*24+3"));
@@ -34,9 +28,6 @@ public class TimeConfigTest {
         assertEquals(4, TimeConfig.parseToHour("2+2"));
     }
 
-    /**
-     * Tests the parseToHour method with invalid configurations.
-     */
     @Test
     public void testParseToHourWithInvalid() {
         assertThrows(IllegalValueException.class, () -> TimeConfig.parseToHour("abc"));
